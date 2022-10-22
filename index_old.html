@@ -1,0 +1,322 @@
+<HTML>
+    <HEAD> <TITLE>MicNest</TITLE> 
+
+
+    <style>
+            * {box-sizing: border-box;}
+            body {font-family: Verdana, sans-serif;}
+            .mySlides {display: none;}
+            img {vertical-align: middle;}
+            
+            /* Slideshow container */
+            .slideshow-container {
+              max-width: 1000px;
+              position: relative;
+              margin: auto;
+            }
+            
+            /* Caption text */
+            .text {
+              color: #f2f2f2;
+              font-size: 15px;
+              padding: 8px 12px;
+              position: absolute;
+              bottom: 8px;
+              width: 100%;
+              text-align: center;
+            }
+            
+            /* Number text (1/5 etc) */
+            .numbertext {
+              color: #f2f2f2;
+              font-size: 12px;
+              padding: 8px 12px;
+              position: absolute;
+              top: 0;
+            }
+            
+            /* The dots/bullets/indicators */
+            .dot {
+              height: 15px;
+              width: 15px;
+              margin: 0 2px;
+              background-color: #bbb;
+              border-radius: 50%;
+              display: inline-block;
+              transition: background-color 0.6s ease;
+            }
+            
+            .active {
+              background-color: #717171;
+            }
+            
+            /* Fading animation */
+            .fade {
+              animation-name: fade;
+              animation-duration: 1.5s;
+            }
+            
+            @keyframes fade {
+              from {opacity: .4} 
+              to {opacity: 1}
+            }
+            
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+              .text {font-size: 11px}
+            }
+    </style>
+
+
+
+    
+    <!-- For Math Latex Display from https://www.mathjax.org/ -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</HEAD>
+
+    <BODY>
+    
+    <h1>MicNest</h1>
+    
+    <p>This page is a supplement to the paper "MicNest: Long-Range Instant Acoustic Localization of Drones in Precise Landing".</p>
+
+    <div class="slideshow-container" onmouseover="divmove(this)" onmouseleave="divleave(this)">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 5</div>
+                <img src="pics/hardware_16_9.jpg" style="width:100%">
+                <div class="text">Hardware</div>
+            </div>
+            
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 6</div>
+                <img src="pics/fly.gif" style="width:100%">
+                <div class="text">Cruising</div>
+            </div>
+            
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 6</div>
+                <img src="pics/landing1.gif" style="width:100%">
+                <div class="text">Landing</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 6</div>
+                <img src="pics/landing2.gif" style="width:100%">
+                <div class="text">Landing</div>
+            </div>
+
+
+            
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 6</div>
+                <img src="pics/unlock.gif" style="width:100%">
+                <div class="text">Unlock</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">6 / 6</div>
+                <img src="pics/multiple.gif" style="width:100%">
+                <div class="text">Multiple Drones</div>
+            </div>
+        </div>
+
+        <br>
+        
+        <div style="text-align:center">
+          <span class="dot" onmouseover="dotmove(0)" onmouseleave="dotleave(0)"></span> 
+          <span class="dot" onmouseover="dotmove(1)" onmouseleave="dotleave(1)"></span> 
+          <span class="dot" onmouseover="dotmove(2)" onmouseleave="dotleave(2)"></span>
+          <span class="dot" onmouseover="dotmove(3)" onmouseleave="dotleave(3)"></span>
+          <span class="dot" onmouseover="dotmove(4)" onmouseleave="dotleave(4)"></span>  
+          <span class="dot" onmouseover="dotmove(5)" onmouseleave="dotleave(5)"></span>  
+        </div>
+        
+        <script>
+            let slideIndex = 0;
+            let slideStatus = true;
+            let timeoutId = 0;
+            showSlides();
+            
+            function showSlides() {
+            if (!slideStatus) return
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            timeoutId = setTimeout(showSlides, 2500); // Change image every 2.5 seconds
+            }
+
+            function divmove() {
+                clearTimeout(timeoutId)
+            }
+
+            function divleave() {
+                showSlides()
+            }
+
+            function dotmove(index) {
+                clearTimeout(timeoutId)
+                slideIndex = index
+                showSlides()
+                clearTimeout(timeoutId)
+            }
+
+            function dotleave(index) {
+                showSlides()
+            }
+        </script>
+
+
+
+    <hr>
+    <br>
+    <br>
+    <br>
+
+    <h2>1. Raw Audio Files (Supplement to Section 1)</h2>
+    <p>Basic information:</p>
+    <ul>
+        <li>The audios are recorded by four microphones.</li>
+        <li>The drone files along a squared sprial (described in Section 6.1) at a altitude of 50 m.</li>
+        <li>Throughout the audios, the drone keeps transmitting PRN pulses. </li>
+    </ul>
+        
+    <p><b>IMPORTANT:</b> Please set <b>a LOW playback volume</b> before play.</p>
+    <table>
+        <style> table, th, td {border: 1px solid black;} </style>
+        <tr>
+            <th>Channel 0 (from Mic. 0) <a href="./raw/raw_ch0.wav" target="_blank">[Download]</a></th>
+            <th>Channel 1 (from Mic. 1) <a href="./raw/raw_ch1.wav" target="_blank">[Download]</a></th>
+            <th>Channel 2 (from Mic. 2) <a href="./raw/raw_ch2.wav" target="_blank">[Download]</a></th>
+            <th>Channel 3 (from Mic. 3) <a href="./raw/raw_ch3.wav" target="_blank">[Download]</a></th>
+        </tr>
+        <tr>
+            <td>
+                <img src="pics/spectrums/spectrum_ch0.svg" style="max-height:300px;max-width:400px;"><br>
+                <audio controls><source src="raw/raw_ch0.wav"></audio>
+            </td>
+            <td>
+                <img src="pics/spectrums/spectrum_ch1.svg" style="max-height:300px;max-width:400px;"><br>
+                <audio controls><source src="raw/raw_ch1.wav"></audio>
+            </td>
+            <td>
+                <img src="pics/spectrums/spectrum_ch2.svg" style="max-height:300px;max-width:400px;"><br>
+                <audio controls><source src="raw/raw_ch2.wav"></audio>
+            </td>
+            <td>
+                <img src="pics/spectrums/spectrum_ch3.svg" style="max-height:300px;max-width:400px;"><br>
+                <audio controls><source src="raw/raw_ch3.wav"></audio>
+            </td>
+        </tr>
+    </table>
+
+
+    <hr>
+    <br>
+    <br>   
+    <br> 
+
+    <h2>2. Video of visual method at night (Supplement to Section 1)</h2>
+    <!-- <h3>Youtube <a href="https://youtu.be/ucusHGpA6jY"> https://youtu.be/ucusHGpA6jY </a></h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ucusHGpA6jY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <hr> -->
+    <br>
+    <br>   
+    <br> 
+
+    <h2>3. Localization Trajectory of MicNest, RTK, and Visual Marker (Supplement to Section 6.2)</h2>
+
+    <h3>3.1 Video of localization trajectories (Youtube: <a href=" https://youtu.be/VfgFnlOviQQ"> https://youtu.be/VfgFnlOviQQ</a>)</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VfgFnlOviQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+    <h3>3.2 Figure</h3>
+    <table>
+        <style> table, th, td {border: 1px solid black;} </style>
+        <tr>
+            <th>Altitude</th>
+            <th>MicNest</th>
+            <th>RTK</th>
+            <th>Visual Marker</th>
+        </tr>
+        <tr>
+            <td>
+                <br>25m</br>
+            </td>
+            <td>
+                <img src="pics/trajectories/micnest_trajectory_25m.jpg" style="max-height:300px;max-width:400px;"><br>
+               
+            </td>
+            <td>
+                <img src="pics/trajectories/rtk_trajectory_25m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+            <td>
+                <img src="pics/trajectories/vision_trajectory_25m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>75m</br>
+            </td>
+            <td>
+                <img src="pics/trajectories/micnest_trajectory_75m.jpg" style="max-height:300px;max-width:400px;"><br>
+               
+            </td>
+            <td>
+                <img src="pics/trajectories/rtk_trajectory_75m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+            <td>
+                <img src="pics/trajectories/vision_trajectory_75m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>120m</br>
+            </td>
+            <td>
+                <img src="pics/trajectories/micnest_trajectory_120m.jpg" style="max-height:300px;max-width:400px;"><br>
+               
+            </td>
+            <td>
+                <img src="pics/trajectories/rtk_trajectory_120m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+            <td>
+                <img src="pics/trajectories/vision_trajectory_120m.jpg" style="max-height:300px;max-width:400px;"><br>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <hr>
+    <br>
+    <br>   
+    <br> 
+
+
+
+
+
+
+  
+
+
+</BODY>
+</HTML>
